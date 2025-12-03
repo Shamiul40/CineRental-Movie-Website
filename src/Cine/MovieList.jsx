@@ -1,5 +1,6 @@
 import React from "react";
 import { getAllMovies } from "../data/movies";
+import { getImageURL } from "../utility/utility";
 
 export default function MovieList() {
   const movies = getAllMovies();
@@ -11,7 +12,7 @@ export default function MovieList() {
           <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
             <img
               className="w-full object-cover"
-              src="./assets/movie-1.png"
+              src={getImageURL(movie.cover)}
               alt=""
             />
             <figcaption className="pt-4">
@@ -31,7 +32,7 @@ export default function MovieList() {
                 href="#"
               >
                 <img src="./assets/tag.svg" alt="" />
-                <span>$100 | Add to Cart</span>
+                <span>${movie.price}</span>
               </a>
             </figcaption>
           </figure>

@@ -1,53 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { getImageURL } from "../utility/utility";
-import Rating from './Rating';
-import MovieDetailsModal from './MovieDetailsModal';
+import Rating from "./Rating";
+import MovieDetailsModal from "./MovieDetailsModal";
 
-export default function MovieCard({movie}) {
+export default function MovieCard({ movie }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-  const [showModal, setShowModal] = useState(false)
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const handleModaleClose = () => {
+    setSelectedMovie(null);
+    setShowModal(false);
+  };
 
-  const handleModaleClose =()=>{
-    setSelectedMovie(null)
-    setShowModal(false)
-  }
-
-  const handleMovieSelection =(movie)=>{
-    setSelectedMovie(movie)
-    setShowModal(true)
-  }
+  const handleMovieSelection = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
 
   return (
     <div>
-      {
-        showModal && <MovieDetailsModal movie={selectedMovie} onClose={handleModaleClose} />
-      }
-       <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
-           <a onClick={()=>handleMovieSelection(movie)} href="">
-            <img
-              className="w-full object-cover"
-              src={getImageURL(movie.cover)}
-              alt=""
-            />
-            <figcaption className="pt-4">
-              <h3 className="text-xl mb-1">{movie.title}</h3>
-              <p className="text-[#575A6E] text-sm mb-2">
-                {movie.genre}
-              </p>
-              <div className=" flex items-center space-x-1 mb-5">
-                <Rating value={movie.rating} />
-              </div>
-              <a
-                className="bg-green-400 rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                href="#"
-              >
-                <img src="./assets/tag.svg" alt="" />
-                <span>${movie.price} | Add to Cart</span>
-              </a> 
-            </figcaption>
+      {showModal && (
+        <MovieDetailsModal movie={selectedMovie} onClose={handleModaleClose} />
+      )}
+      <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
+        <a onClick={(e) => {
+          e.preventDefault();
+          handleMovieSelection(movie)
+        }} href="">
+          <img
+            className="w-full object-cover"
+            src={getImageURL(movie.cover)}
+            alt=""
+          />
+          <figcaption className="pt-4">
+            <h3 className="text-xl mb-1">{movie.title}</h3>
+            <p className="text-[#575A6E] text-sm mb-2">{movie.genre}</p>
+            <div className=" flex items-center space-x-1 mb-5">
+              <Rating value={movie.rating} />
+            </div>
+            <a
+              className="bg-green-400 rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
+              href="#"
+            >
+              <img src="./assets/tag.svg" alt="" />
+              <span>${movie.price} | Add to Cart</span>
             </a>
-          </figure>
+          </figcaption>
+        </a>
+      </figure>
     </div>
-  )
+  );
 }

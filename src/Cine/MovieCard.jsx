@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getImageURL } from "../utility/utility";
 import Rating from './Rating';
 import MovieDetailsModal from './MovieDetailsModal';
 
 export default function MovieCard({movie}) {
+
+  const [showModal, setShowModal] = useState(false)
+  const [selectedMovie, setSelectedMovie] = useState(null)
+
+  const handleModaleClose =()=>{
+    setSelectedMovie(null)
+    setShowModal(false)
+  }
+
+  const handleMovieSelection =(movie)=>{
+    setSelectedMovie(movie)
+    setShowModal(true)
+  }
+
   return (
     <div>
-      <MovieDetailsModal />
+      {
+        showModal && <MovieDetailsModal movie={selectedMovie} onClose={handleModaleClose} />
+      }
        <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
+           <a onClick={()=>handleMovieSelection(movie)} href="">
             <img
               className="w-full object-cover"
               src={getImageURL(movie.cover)}
@@ -29,6 +46,7 @@ export default function MovieCard({movie}) {
                 <span>${movie.price} | Add to Cart</span>
               </a> 
             </figcaption>
+            </a>
           </figure>
     </div>
   )

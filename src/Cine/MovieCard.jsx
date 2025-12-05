@@ -1,10 +1,12 @@
 import React from 'react'
 import { getImageURL } from "../utility/utility";
 import Rating from './Rating';
+import MovieDetailsModal from './MovieDetailsModal';
 
 export default function MovieCard({movie}) {
   return (
     <div>
+      <MovieDetailsModal />
        <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
             <img
               className="w-full object-cover"

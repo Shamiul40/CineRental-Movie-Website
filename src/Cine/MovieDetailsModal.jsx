@@ -1,7 +1,7 @@
 import React from 'react'
 import { getImageURL } from '../utility/utility'
 
-export default function MovieDetailsModal({movie, onClose}) {
+export default function MovieDetailsModal({movie, onClose, onCartAdd}) {
 
 
   return (
@@ -33,6 +33,7 @@ export default function MovieDetailsModal({movie, onClose}) {
               <a
                 className="bg-white rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                 href="#"
+                onClick={(e)=>onCartAdd(e, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price} | Add to Cart</span>

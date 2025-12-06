@@ -32,7 +32,8 @@ export default function CartDetails({onClose}) {
             className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
           >
            {
-            cartData.map(item=>(
+           cartData.length > 0 ? (
+             cartData.map(item=>(
                <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
               <div className="flex items-center gap-4">
                 <img
@@ -61,6 +62,9 @@ export default function CartDetails({onClose}) {
               </div>
             </div>
             ))
+           )  : (
+            <p>This cart is empty</p>
+           )
            }
           
           </div>
